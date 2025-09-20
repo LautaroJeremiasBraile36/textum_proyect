@@ -50,11 +50,11 @@ h3 {
   margin-bottom: 1rem;
 }
 #containerLogo {
-  margin-top: 4rem;
+  margin-top: 3rem;
   overflow: hidden;
   object-fit: cover;
-  width: 100px;
-  height: 100px;
+  width: 160px;
+  height: 160px;
 }
 #logo {
   width: 100%;
