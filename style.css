@@ -37,13 +37,30 @@ h3 {
 .intro-content {
   max-width: 600px;
   animation: slideUp 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  object-fit: cover;
 }
 
 .intro-content p {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-
+#containerLogo {
+  margin-top: 1rem;
+  overflow: hidden;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+}
+#logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
 /* --- Estilos de botones --- */
 .btn {
   background: #2575fc;
