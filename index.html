@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Textum - App de reformulación de texto</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <!-- Pantalla de bienvenida -->
+    <section id="intro-screen" class="intro-screen">
+      <div class="intro-content">
+        <h1>Bienvenid@ a Textum: Reformulador de texto</h1>
+        <br />
+        <p>
+          Textum toma tu mensaje original y lo transforma en una versión más
+          empática, clara y profesional, ideal para enviar a clientes o
+          contactos.
+        </p>
+        <button id="startBtn" class="btn">Comenzar</button>
+      </div>
+    </section>
+
+    <!-- Pantalla principal -->
+    <main id="app" class="hidden">
+      <h2>Ingresá tu mensaje</h2>
+      <textarea
+        id="userInput"
+        placeholder="Escribí aquí tu mensaje..."
+        rows="5"
+      ></textarea>
+
+      <div class="acciones">
+        <button id="generarBtn" class="btn">Reformular</button>
+        <button id="guardarBtn" class="btn secondary">Guardar respuesta</button>
+        <button id="limpiarBtn" class="btn danger">Limpiar</button>
+        <button id="instructivoBtn" class="btn ghost">Ver instructivo</button>
+        <button id="reutilizablesBtn" class="btn ghost">
+          Respuestas reutilizables
+        </button>
+      </div>
+
+      <section id="resultado" class="resultado">
+        <h3>Reformulación:</h3>
+        <p id="textoReformulado" class="texto-reformulado"></p>
+      </section>
+    </main>
+
+    <!-- Sección de respuestas reutilizables -->
+    <section id="reutilizables" class="hidden reutilizables">
+      <h2>Respuestas reutilizables</h2>
+      <div id="listaReutilizables" class="lista-reutilizables"></div>
+      <button id="volverBtn" class="btn">Volver al reformulador</button>
+    </section>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
