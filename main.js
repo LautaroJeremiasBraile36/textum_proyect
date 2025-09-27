@@ -75,12 +75,23 @@ main(); */
     generarBtn.textContent = "generar contenido";
   }
 }); */
+
 import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyBUuUkhSfcJ-HOihR5PZNfdsQSD4vZmHVU");
+const genAI = new GoogleGenerativeAI("AIzaSyBWIK6hjNPDVUUOWBoqXFZ4EUJdm9gmHH0");
 
 // DOM
+/* DOM CINEMATICA */
+const splash = document.getElementById("splash");
+const video = document.getElementById("splash-video");
+const skipBtn = document.getElementById("skip-btn");
+/* DOM CINEMATICA */
+/* DOM APP */
 const generarBtn = document.getElementById("generarBtn");
+const generarImgBtn = document.createElement("button");
+generarImgBtn.textContent = "Generar Imagen";
+generarImgBtn.className = "btn secondary";
+document.querySelector(".acciones").appendChild(generarImgBtn);
 const userInput = document.getElementById("userInput");
 const textoReformulado = document.getElementById("textoReformulado");
 const introScreen = document.getElementById("intro-screen");
@@ -93,13 +104,23 @@ const listaReutilizables = document.getElementById("listaReutilizables");
 const volverBtn = document.getElementById("volverBtn");
 const guardarBtn = document.getElementById("guardarBtn");
 const limpiarBtn = document.getElementById("limpiarBtn");
+/* DOM APP */
+/* FUNCION CINEMATICA */
+function logoCinematica() {
+  splash.classList.add("fade-out");
+  setTimeout(() => {
+    splash.remove();
+    app.hidden = false;
+  }, 800); // coincide con la duración de la animación CSS
+}
+/* FUNCION CINEMATICA */
 
 let ultimaRespuesta = "";
 reutilizablesSection.style.display = "none";
 // Generar texto
 async function generarTexto(textoUsuario) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt = `
 Analizá y reformulá este texto para que sea empático, claro y profesional. No debes responder como si te hablaran a vos, sos solo un medium de interpretación y traducción:
@@ -115,9 +136,43 @@ Devolvé SOLO la reformulación.
 
     ultimaRespuesta = texto;
     textoReformulado.textContent = texto;
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     textoReformulado.textContent = "⚠️ Error generando reformulación.";
+  }
+}
+
+// --- Generar imagen ---
+async function generarImagen() {
+  if (!ultimaRespuesta) {
+    Swal.fire("⚠️ Primero generá una reformulación antes de la imagen.");
+    return;
+  }
+
+  try {
+    const model = aiImage.getGenerativeModel({
+      model: "imagen-3.0-generate-002",
+    });
+
+    const prompt = `
+Crea una representación visual clara, moderna y conceptual que muestre la relación entre:
+- Texto original: "${userInput.value}"
+- Reformulación: "${ultimaRespuesta}"
+
+Puede ser un cuadro comparativo, mapa conceptual o esquema gráfico atractivo.
+    `;
+
+    const result = await model.generateImage(prompt);
+    const imgData =
+      result.response.candidates[0].content.parts[0].inlineData.data;
+
+    imagenGenerada.innerHTML = `
+      <h3>Imagen generada:</h3>
+      <img src="data:image/png;base64,${imgData}" alt="Imagen IA" style="max-width:100%; border-radius:12px; margin-top:1rem;"/>
+    `;
+  } catch (error) {
+    console.error(error);
+    imagenGenerada.innerHTML = "<p>⚠️ Error generando la imagen.</p>";
   }
 }
 
@@ -150,12 +205,16 @@ function mostrarReutilizables() {
 }
 
 // Eventos
+video.addEventListener("ended", logoCinematica);
+skipBtn.addEventListener("click", logoCinematica);
 generarBtn.addEventListener("click", () => {
   const textoUsuario = userInput.value.trim();
   if (textoUsuario) generarTexto(textoUsuario);
 });
 
 guardarBtn.addEventListener("click", guardarRespuesta);
+
+generarImgBtn.addEventListener("click", generarImagen);
 
 limpiarBtn.addEventListener("click", () => {
   if (ultimaRespuesta) {

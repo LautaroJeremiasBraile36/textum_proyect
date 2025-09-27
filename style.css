@@ -20,6 +20,47 @@ h3 {
 }
 
 /* --- Pantalla de bienvenida --- */
+/* Cinematica */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#splash video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#skip-btn {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+}
+
+.fade-out {
+  animation: fadeOut 0.8s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+/* Cinematica */
 .intro-screen {
   position: fixed;
   inset: 0;
@@ -161,6 +202,17 @@ textarea:focus {
   color: #1e1e1e;
   font-style: italic;
   animation: none; /* Desactivar animación de pulso, puede ser molesta */
+}
+#imagenGenerada img {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+#imagenGenerada img:hover {
+  transform: scale(1.03);
 }
 
 /* --- Sección reutilizables --- */

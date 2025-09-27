@@ -18,7 +18,7 @@
 - **HTML5 y CSS3**: Estructura y diseño moderno de la interfaz, con **Flexbox, Grid y animaciones CSS**.
 - **Google Generative AI (Gemini)**: Motor de IA que realiza la reformulación de mensajes en base a prompts.
 - **SweetAlert2**: Para alertas y confirmaciones visualmente atractivas en el front-end.
-- **LocalStorage**: Permite guardar respuestas y reutilizarlas sin depender de un backend pesado.
+- **LocalStorage**: Permite guardar respuestas y reutilizarlas sin depender de un backend.
 
 ---
 
