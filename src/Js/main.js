@@ -187,20 +187,53 @@ function guardarRespuesta() {
   localStorage.setItem("respuestas", JSON.stringify(respuestas));
   Swal.fire("✅ Guardado", "La respuesta se guardó correctamente.", "success");
 }
+function eliminarRespuesta(index) {
+  let respuestas = JSON.parse(localStorage.getItem("respuestas")) || [];
+  respuestas.splice(index, 1);
+  localStorage.setItem("respuestas", JSON.stringify(respuestas));
+  mostrarReutilizables();
+  Swal.fire("🗑️ Eliminado", "La respuesta fue eliminada.", "success");
+}
 
 // Mostrar respuestas reutilizables
 function mostrarReutilizables() {
   listaReutilizables.innerHTML = "";
   const respuestas = JSON.parse(localStorage.getItem("respuestas")) || [];
+
   if (respuestas.length === 0) {
     listaReutilizables.innerHTML = "<p>No hay respuestas guardadas aún.</p>";
     return;
   }
-  respuestas.forEach((r) => {
+
+  respuestas.forEach((r, index) => {
     const card = document.createElement("div");
     card.className = "respuesta-card";
-    card.innerHTML = `<p>${r.texto}</p><small>${r.fecha}</small>`;
+    card.innerHTML = `
+      <p>${r.texto}</p>
+      <small>${r.fecha}</small>
+      <button class="btn danger eliminar-btn" data-index="${index}">Eliminar</button>
+    `;
     listaReutilizables.appendChild(card);
+  });
+
+  // 🔑 Reasignar eventos a los botones recién creados
+  document.querySelectorAll(".eliminar-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const index = e.target.getAttribute("data-index");
+
+      Swal.fire({
+        title: "¿Eliminar respuesta?",
+        text: "Esta acción no se puede deshacer.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          eliminarRespuesta(index);
+        }
+      });
+    });
   });
 }
 

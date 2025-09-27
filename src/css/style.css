@@ -1,9 +1,8 @@
-/* Base y Mobile-First */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: roboto, "Segoe UI", sans-serif;
   line-height: 1.6;
 }
 
@@ -19,39 +18,41 @@ h3 {
   line-height: 1.2;
 }
 
-/* --- Pantalla de bienvenida --- */
-/* Cinematica */
 #splash {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: black;
+  background: #000;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
-
 #splash video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
-#skip-btn {
+#splash #skip-btn {
   position: absolute;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1rem;
+  right: 1rem;
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: #fff;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  backdrop-filter: blur(4px);
   border-radius: 8px;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease-in-out;
 }
-
-.fade-out {
-  animation: fadeOut 0.8s forwards;
+#splash #skip-btn:hover, #splash #skip-btn:focus {
+  background: rgba(255, 255, 255, 0.4);
+  outline: none;
+}
+#splash.fade-out {
+  animation: fadeOut 0.6s forwards;
 }
 
 @keyframes fadeOut {
@@ -60,7 +61,6 @@ h3 {
     visibility: hidden;
   }
 }
-/* Cinematica */
 .intro-screen {
   position: fixed;
   inset: 0;
@@ -74,61 +74,51 @@ h3 {
   z-index: 100;
   animation: fadeIn 1.5s ease-in;
 }
-
-.intro-content {
+.intro-screen .intro-content {
   max-width: 600px;
   animation: slideUp 1s ease-in-out;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  overflow: hidden;
-  object-fit: cover;
 }
-
-.intro-content p {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+.intro-screen .intro-content p {
+  margin: 1rem 0;
 }
-#containerLogo {
+.intro-screen #containerLogo {
   margin-top: 3rem;
-  overflow: hidden;
-  object-fit: cover;
   width: 160px;
   height: 160px;
 }
-#logo {
+.intro-screen #containerLogo #logo {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  overflow: hidden;
   object-fit: cover;
 }
-/* --- Estilos de botones --- */
+
 .btn {
   background: #2575fc;
   color: #fff;
   border: none;
   padding: 0.8rem 1.5rem;
-  border-radius: 50px; /* Borde más curvo para mejor estética */
+  border-radius: 50px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s ease-in-out, background 0.3s ease;
-  white-space: nowrap; /* Evita que el texto del botón se rompa */
+  white-space: nowrap;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .btn:hover {
-  transform: translateY(-2px); /* Un pequeño levantamiento para el hover */
-  background: #1e63e2;
+  transform: translateY(-2px);
+  background: rgb(3.2307692308, 89.3846153846, 234.7692307692);
 }
-
 .btn.secondary {
   background: #6a11cb;
 }
 .btn.danger {
-  background: #dc3545; /* Rojo más estándar y visible */
+  background: #db35dc;
 }
 .btn.ghost {
   background: transparent;
@@ -140,13 +130,26 @@ h3 {
   background: rgba(37, 117, 252, 0.1);
 }
 
-/* --- Pantalla principal (Mobile-First) --- */
+.respuesta-card .eliminar-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.respuesta-card .eliminar-btn:hover {
+  background: #c82333;
+}
+
 .hidden {
   display: none;
 }
 
 main {
-  padding: 1.5rem 1rem; /* Padding adaptado para móviles */
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,12 +158,11 @@ main {
   animation: fadeIn 1s ease-in-out;
 }
 main h2 {
+  margin-top: 10px;
   color: black;
-  line-height: 1.2;
   text-align: center;
 }
-
-textarea {
+main textarea {
   width: 100%;
   padding: 1rem;
   border-radius: 12px;
@@ -169,40 +171,35 @@ textarea {
   resize: none;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
-
-textarea:focus {
+main textarea:focus {
   border-color: #2575fc;
   box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
   outline: none;
 }
-
-.acciones {
+main .acciones {
   display: flex;
-  flex-direction: column; /* Botones apilados en móvil */
+  flex-direction: column;
   gap: 0.75rem;
 }
-
-.acciones .btn {
-  width: 100%; /* Botones ocupan todo el ancho */
+main .acciones .btn {
+  width: 100%;
 }
-
-.resultado {
+main .resultado {
   padding: 1.5rem;
   border-radius: 15px;
-  background: #f1f7fe; /* Fondo más sutil */
+  background: #f1f7fe;
   border: 1px solid #c9e2f9;
   animation: fadeIn 1.2s ease-in-out;
 }
-.resultado h3 {
+main .resultado h3 {
   color: black;
-  line-height: 1.2;
 }
-.texto-reformulado {
-  font-size: 1rem; /* Un poco más pequeño para móviles */
+main .resultado .texto-reformulado {
+  font-size: 1rem;
   color: #1e1e1e;
   font-style: italic;
-  animation: none; /* Desactivar animación de pulso, puede ser molesta */
 }
+
 #imagenGenerada img {
   display: block;
   margin: 0 auto;
@@ -210,98 +207,95 @@ textarea:focus {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
 }
-
 #imagenGenerada img:hover {
   transform: scale(1.03);
 }
 
-/* --- Sección reutilizables --- */
 .reutilizables {
   padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 20px;
   animation: fadeIn 1s ease-in-out;
 }
 .reutilizables h2 {
+  margin-top: 10px;
   color: black;
-  line-height: 1.2;
 }
-.lista-reutilizables {
+.reutilizables .lista-reutilizables {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   animation: fadeIn 1s ease-in-out;
 }
-
-.respuesta-card {
+.reutilizables .respuesta-card {
   background: #fff;
   padding: 1rem;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
   text-align: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.2s ease;
 }
-
-.respuesta-card:hover {
+.reutilizables .respuesta-card:hover {
   transform: translateY(-2px);
 }
 
-/* --- Media Queries para tablets y desktops --- */
 @media (min-width: 768px) {
+  #splash #skip-btn {
+    bottom: 2rem;
+    right: 2rem;
+    font-size: 1rem;
+    padding: 1rem 1.25rem;
+  }
   main,
   .reutilizables {
     padding: 2.5rem;
     max-width: 900px;
     margin: 0 auto;
   }
-
   h1 {
     font-size: 2.5rem;
   }
-
   h2 {
     font-size: 2rem;
   }
-
   .acciones {
-    flex-direction: row; /* Botones en fila para pantallas más grandes */
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
   }
-
   .acciones .btn {
-    width: auto; /* Ancho automático para no ocupar todo el espacio */
+    width: auto;
   }
-
   .texto-reformulado {
-    font-size: 1.15rem; /* Aumento de tamaño para mejor legibilidad */
+    font-size: 1.15rem;
   }
 }
-
-/* --- Media Query para pantallas grandes (laptops, desktops) --- */
 @media (min-width: 1200px) {
+  #splash #skip-btn {
+    font-size: 1.1rem;
+    padding: 1.25rem 1.5rem;
+  }
   main,
   .reutilizables {
     max-width: 1100px;
     padding: 3rem;
   }
-
   h1 {
     font-size: 3rem;
   }
-
   .resultado {
     padding: 2rem;
   }
 }
-
-/* --- Animaciones (sin cambios) --- */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -330,3 +324,5 @@ textarea:focus {
     opacity: 1;
   }
 }
+
+/*# sourceMappingURL=style.css.map */

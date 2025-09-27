@@ -1,0 +1,384 @@
+// Variables base
+$primary: #2575fc;
+$secondary: #6a11cb;
+$danger: #db35dc;
+$light-bg: #f8f9fa;
+$text-color: #333;
+
+// Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: roboto, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+body {
+  background-color: $light-bg;
+  color: $text-color;
+}
+
+h1,
+h2,
+h3 {
+  color: white;
+  line-height: 1.2;
+}
+
+// --- Pantalla de bienvenida ---
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #skip-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease-in-out;
+
+    &:hover,
+    &:focus {
+      background: rgba(255, 255, 255, 0.4);
+      outline: none;
+    }
+  }
+
+  &.fade-out {
+    animation: fadeOut 0.6s forwards;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, $secondary, $primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  z-index: 100;
+  animation: fadeIn 1.5s ease-in;
+
+  .intro-content {
+    max-width: 600px;
+    animation: slideUp 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      margin: 1rem 0;
+    }
+  }
+
+  #containerLogo {
+    margin-top: 3rem;
+    width: 160px;
+    height: 160px;
+
+    #logo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+}
+
+// --- Botones ---
+.btn {
+  background: $primary;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    background: darken($primary, 10%);
+  }
+
+  &.secondary {
+    background: $secondary;
+  }
+
+  &.danger {
+    background: $danger;
+  }
+
+  &.ghost {
+    background: transparent;
+    color: $primary;
+    border: 2px solid $primary;
+    box-shadow: none;
+
+    &:hover {
+      background: rgba($primary, 0.1);
+    }
+  }
+}
+
+.respuesta-card {
+  .eliminar-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    background: linear-gradient(135deg, $secondary, $primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: #c82333;
+    }
+  }
+}
+
+// --- Main ---
+.hidden {
+  display: none;
+}
+
+main {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  animation: fadeIn 1s ease-in-out;
+
+  h2 {
+    margin-top: 10px;
+    color: black;
+    text-align: center;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 2px solid #ddd;
+    font-size: 1rem;
+    resize: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 8px rgba($primary, 0.5);
+      outline: none;
+    }
+  }
+
+  .acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  .resultado {
+    padding: 1.5rem;
+    border-radius: 15px;
+    background: #f1f7fe;
+    border: 1px solid #c9e2f9;
+    animation: fadeIn 1.2s ease-in-out;
+
+    h3 {
+      color: black;
+    }
+
+    .texto-reformulado {
+      font-size: 1rem;
+      color: #1e1e1e;
+      font-style: italic;
+    }
+  }
+}
+
+// --- Imagen generada ---
+#imagenGenerada img {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+// --- Reutilizables ---
+.reutilizables {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 1s ease-in-out;
+
+  h2 {
+    margin-top: 10px;
+    color: black;
+  }
+
+  .lista-reutilizables {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .respuesta-card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// --- Media queries ---
+@media (min-width: 768px) {
+  #splash #skip-btn {
+    bottom: 2rem;
+    right: 2rem;
+    font-size: 1rem;
+    padding: 1rem 1.25rem;
+  }
+
+  main,
+  .reutilizables {
+    padding: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+
+  .acciones {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+
+    .btn {
+      width: auto;
+    }
+  }
+
+  .texto-reformulado {
+    font-size: 1.15rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  #splash #skip-btn {
+    font-size: 1.1rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  main,
+  .reutilizables {
+    max-width: 1100px;
+    padding: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .resultado {
+    padding: 2rem;
+  }
+}
+
+// --- Animaciones ---
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
